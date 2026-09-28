@@ -125,7 +125,7 @@
             <option value="實用工具">實用工具</option>
             <option value="行政管理">行政管理</option>
             <option value="教學輔助">教學輔助</option>
-            <option value="未分類">未分類</option>
+            <option value="學科程式">學科程式</option>
           </select>
         </div>
 
@@ -177,7 +177,7 @@
       { id: '4', name: '教材', url: GITHUB_BASE + 'teaching-materials', category: '教學輔助', icon: 'fa-book-open', color: '#8b5cf6' },
       { id: '5', name: '通知表格', url: GITHUB_BASE + 'notice-forms', category: '行政管理', icon: 'fa-file-signature', color: '#ec4899' },
       { id: '6', name: 'Timetable時間表', url: '', category: '教學輔助', icon: 'fa-calendar-days', color: '#0ea5e9' },
-      { id: '7', name: 'try', url: GITHUB_BASE + 'try', category: '未分類', icon: 'fa-calculator', color: '#6366f1' }
+      { id: '7', name: 'try', url: GITHUB_BASE + 'try', category: '學科程式', icon: 'fa-calculator', color: '#6366f1' }
     ];
 
     let apps = JSON.parse(localStorage.getItem('twgh_khn_apps')) || defaultApps;
@@ -198,7 +198,7 @@
     }
 
     function renderCategories() {
-      const categories = ['全部程式', '實用工具', '行政管理', '教學輔助', '未分類'];
+      const categories = ['全部程式', '實用工具', '行政管理', '教學輔助', '學科程式'];
       const container = document.getElementById('categoryContainer');
       container.innerHTML = categories.map(cat => `
         <button onclick="setCategory('${cat}')" class="px-4 py-1.5 rounded-xl text-xs font-bold transition whitespace-nowrap ${selectedCategory === cat ? 'bg-sky-500 text-white shadow-md border-2 border-sky-600' : 'bg-white text-gray-600 border-2 border-gray-200 hover:bg-sky-50'}">
@@ -218,7 +218,7 @@
       const grid = document.getElementById('appGrid');
       
       const filtered = apps.filter(app => {
-        const matchesCategory = selectedCategory === '全部程式' || (app.category || '未分類') === selectedCategory;
+        const matchesCategory = selectedCategory === '全部程式' || (app.category || '學科程式') === selectedCategory;
         const matchesSearch = app.name.toLowerCase().includes(search);
         return matchesCategory && matchesSearch;
       });
@@ -244,7 +244,7 @@
             </div>
             
             <h4 class="font-extrabold text-gray-800 text-base mb-1">${app.name}</h4>
-            <span class="px-3 py-0.5 bg-sky-100 text-sky-700 rounded-full text-[11px] font-bold mb-4">${app.category || '未分類'}</span>
+            <span class="px-3 py-0.5 bg-sky-100 text-sky-700 rounded-full text-[11px] font-bold mb-4">${app.category || '學科程式'}</span>
 
             ${hasUrl ? `
               <a href="${app.url}" target="_blank" class="w-full py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-2xl text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-sm">
@@ -298,7 +298,7 @@
       document.getElementById('appId').value = app ? app.id : '';
       document.getElementById('appName').value = app ? app.name : '';
       document.getElementById('appUrl').value = app ? app.url : '';
-      document.getElementById('appCategory').value = app ? (app.category || '未分類') : '實用工具';
+      document.getElementById('appCategory').value = app ? (app.category || '學科程式') : '實用工具';
       document.getElementById('modalTitle').innerHTML = app ? '<i class="fa-solid fa-pen-to-square text-amber-500"></i> 修改小程序' : '<i class="fa-solid fa-wand-magic-sparkles text-yellow-400"></i> 新增小程序';
       
       selectIcon(app ? app.icon : icons[0]);
